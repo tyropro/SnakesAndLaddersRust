@@ -15,7 +15,7 @@ const BOARD: [u8; 100] = [
     0, 0, 73, 0, 75, 0, 0, 79, 0, 0];
 
 fn turn(mut space: u8) -> u8 {
-    let mut rng = rand::thread_rng();
+    let mut rng: rand::rngs::ThreadRng = rand::thread_rng();
 
     let roll: u8 = rng.gen_range(1..7); // rolls the dice (random number 1-6)
     space += roll; // adds rolls to current space
@@ -30,7 +30,7 @@ fn turn(mut space: u8) -> u8 {
 
 fn check_over_goal(mut space: u8) -> u8 {
     if space > 100 { // checks if the player has gone over the goal
-        let spaces_over = space - 100; // gets how many spaces the user has gone over 100
+        let spaces_over: u8 = space - 100; // gets how many spaces the user has gone over 100
         space -= spaces_over * 2; // decreases current spaces by 'spaces over 100' * 2 (*2 is necessary to reduce the space below 100)
 
         // outputs the current space and how many spaces over 100 to the user
@@ -47,7 +47,7 @@ fn check_movement(mut space: u8) -> u8 {
     let space_index: usize = (space - 1).into(); 
 
     if BOARD[space_index] != 0 {
-        let mut thing = ""; // thing is either a snake or a ladder
+        let mut thing: &str = ""; // thing is either a snake or a ladder
         if BOARD[space_index] > space { // if space is smaller than the index of 'BOARD', it's a ladder
             thing = "ladder";
         } else if BOARD[space_index] < space {
@@ -77,7 +77,7 @@ fn main() {
     // code loop
     while play {
         // logic for inputs
-        let mut input = String::new();
+        let mut input: String = String::new();
         std::io::stdin().read_line(&mut input).expect("");
         input = input.trim().to_owned(); // trims whitespace of front and end of input
         if input.len() == 1 && input == "q" { // if input == q, quit program
