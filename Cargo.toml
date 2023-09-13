@@ -1,5 +1,5 @@
 [package]
-name = "rs-snakesandladders"
+name = "snakesandladders"
 version = "0.1.0"
 edition = "2021"
 
