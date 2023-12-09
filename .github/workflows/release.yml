@@ -1,6 +1,9 @@
             - name: Rust Release binary
   # You may pin to the exact commit or the version.
   # uses: rust-build/rust-build.action@58ff99792e9c81ac6581731903d1a3d3f9c399f9
+  on:
+    release: 
+      types: [created]
   uses: rust-build/rust-build.action@v1.4.4
   with:
     # Output target
