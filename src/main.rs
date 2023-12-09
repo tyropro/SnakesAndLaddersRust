@@ -72,7 +72,7 @@ fn main() {
     let mut play: bool = true;
 
     // print name of game
-    println!("Snakes & Ladders");
+    println!("Snakes & Ladders\nPress space to play!");
 
     // code loop
     while play {
