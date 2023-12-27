@@ -43,6 +43,7 @@ impl Player {
     }
 }
 
+/// Plays a single turn for the given player by rolling the dice, checking for overshooting the goal, handling snakes/ladders, and recording the new position. Returns the updated player state after the turn.
 fn turn(mut player: Player) -> Player {
     player.turns += 1;
 
@@ -51,7 +52,7 @@ fn turn(mut player: Player) -> Player {
     // play 1 turn
     player.current_space = roll(player.current_space, name);
 
-    // check if the user has won
+    // added new goal logic in the main function
     // play = player_1.current_space != GOAL;
 
     player.current_space = check_over_goal(player.current_space);
@@ -62,6 +63,7 @@ fn turn(mut player: Player) -> Player {
     player
 }
 
+// Rolls the dice and returns the new space the player is on.
 fn roll(mut space: u8, name: String) -> u8 {
     let mut rng: rand::rngs::ThreadRng = rand::thread_rng();
 
@@ -76,6 +78,7 @@ fn roll(mut space: u8, name: String) -> u8 {
     space
 }
 
+// Checks if the player has gone over the goal and returns the new space.
 fn check_over_goal(mut space: u8) -> u8 {
     if space > 100 {
         // checks if the player has gone over the goal
@@ -91,6 +94,7 @@ fn check_over_goal(mut space: u8) -> u8 {
     space
 }
 
+// Checks if the player has moved to a new space and returns the new space.
 fn check_movement(mut space: u8) -> u8 {
     // converts the space into an index and 'usize' type
     let space_index: usize = (space - 1) as usize;
@@ -116,9 +120,6 @@ fn check_movement(mut space: u8) -> u8 {
 }
 
 fn main() {
-    // define variables
-    // let mut play: bool = true;
-
     let mut players: Vec<Player> = Vec::new();
 
     println!("Snakes & Ladders\n");
