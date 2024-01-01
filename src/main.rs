@@ -10,7 +10,7 @@ const BOARD: [u8; 100] = [
 ];
 
 const GOAL: u8 = 100; // goal space
-const NO_PLAYERS: i8 = 2;
+//const NO_PLAYERS: u8 = 2;
 
 struct Player {
     current_space: u8, // current space the player is on
@@ -120,10 +120,31 @@ fn check_movement(mut space: u8) -> u8 {
 }
 
 fn main() {
+	// print name of game
+	println!("Snakes & Ladders\n");
+	
     let mut players: Vec<Player> = Vec::new();
-
-    println!("Snakes & Ladders\n");
-    for i in 0..NO_PLAYERS {
+	
+	println!("How many players?");
+	
+	let mut str_no_players = String::new();
+	std::io::stdin().read_line(&mut str_no_players).expect("");
+	
+	let raw_no_players: Result<u8, _> = str_no_players.trim().parse();
+	
+	let no_players: u8;
+	
+	match raw_no_players {
+		Ok(parsed_num) => {
+			no_players = parsed_num;
+		},
+		Err(_) => {
+			println!("Please enter a valid unsigned integer");
+			return;
+		},
+	}
+    
+    for i in 0..no_players {
         // creates new players
         println!("\nEnter name of player {}:", i + 1);
 
@@ -133,9 +154,9 @@ fn main() {
         players.push(Player::new(name));
     }
 
-    let mut current_player: i8 = 1;
+    let mut current_player: u8 = 1;
 
-    // print name of game
+    println!("Press enter to play!");
 
     // code loop
     loop {
@@ -166,7 +187,7 @@ fn main() {
         }
 
         current_player += 1;
-        if current_player > NO_PLAYERS {
+        if current_player > no_players {
             current_player = 1;
         }
     }
