@@ -100,13 +100,11 @@ fn check_movement(mut space: u8) -> u8 {
     let space_index: usize = (space - 1) as usize;
 
     if BOARD[space_index] != 0 {
-        let movement_object: &str;
-
-        if BOARD[space_index] > space {
-            movement_object = "ladder";
+        let movement_object: &str = if BOARD[space_index] > space {
+            "ladder"
         } else {
-            movement_object = "snake";
-        }
+            "snake"
+        };
 
         space = BOARD[space_index]; // sets space to the end of the object (snake or ladder)
 
@@ -132,17 +130,13 @@ fn main() {
 	
 	let raw_no_players: Result<u8, _> = str_no_players.trim().parse();
 	
-	let no_players: u8;
-	
-	match raw_no_players {
-		Ok(parsed_num) => {
-			no_players = parsed_num;
-		},
+	let no_players: u8 = match raw_no_players {
+		Ok(parsed_num) => parsed_num,
 		Err(_) => {
 			println!("Please enter a valid unsigned integer");
 			return;
 		},
-	}
+	};
     
     for i in 0..no_players {
         // creates new players
